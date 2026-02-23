@@ -6,15 +6,15 @@
   --chat--color-secondary: #690dca !important;
 }
 .n8n-chat {
-  right: auto !important;
-  left: 20px !important;
+  left: auto !important;
+  right: 20px !important;
   bottom: 20px !important;
   position: fixed !important;
   z-index: 9998 !important;
 }
 .n8n-chat .chat-window-toggle {
-  right: auto !important;
-  left: 0 !important;
+  left: auto !important;
+  right: 0 !important;
   bottom: 0 !important;
   background-color: #690dca !important;
   background-image: url("https://appexchange.salesforce.com/image_host/4edab281-8080-4b8d-b7f0-52354c1a8190.png") !important;
@@ -35,8 +35,8 @@
   display: none !important;
 }
 .n8n-chat .chat-window {
-  right: auto !important;
-  left: 0 !important;
+  left: auto !important;
+  right: 0 !important;
   bottom: 70px !important;
 }
 .n8n-chat .chat-header {
@@ -68,7 +68,7 @@
 }
 .whatsapp-button {
   position: fixed;
-  left: calc(20px + 70px);
+  right: calc(20px + 70px);
   bottom: 20px;
   width: 60px;
   height: 60px;
