@@ -39,7 +39,7 @@ export function CustomerRedeemPage() {
           const mappedProducts: Product[] = (response.data as unknown[]).map((apiProduct: unknown) => {
             const p = apiProduct as Record<string, unknown>;
             return {
-            id: (p._id as string) || '',
+            id: (p.id as string) || (p._id as string) || '',
             name: (p.name as string) || '',
             description: (p.description as string) || '',
             points: (p.redeem_points as number) || (p.points as number) || 0,

@@ -36,13 +36,16 @@ export function CustomerSupportPage() {
         
         if (response.success && response.data) {
           // Map API response to component's Brand interface
-          const mappedBrands: Brand[] = response.data.map((apiBrand: any) => ({
-            id: apiBrand._id,
-            name: apiBrand.companyName,
-            description: apiBrand.address || apiBrand.country || 'Partner brand',
-            category: apiBrand.country || 'General',
-            linked: user?.linkedBrands?.includes(apiBrand._id) || false,
-          }));
+          const mappedBrands: Brand[] = response.data.map((apiBrand: any) => {
+            const brandId = apiBrand.id || apiBrand._id;
+            return {
+              id: brandId,
+              name: apiBrand.companyName,
+              description: apiBrand.address || apiBrand.country || 'Partner brand',
+              category: apiBrand.country || 'General',
+              linked: user?.linkedBrands?.includes(brandId) || false,
+            };
+          });
           
           setBrands(mappedBrands);
         } else {

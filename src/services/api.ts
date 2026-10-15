@@ -4,7 +4,8 @@
  */
 
 // API Configuration - Vite uses import.meta.env
-const API_BASE_URL = import.meta.env.VITE_CUSTOMER_API_URL || import.meta.env.VITE_API_URL || 'https://api.pointbox.me/api/customer';
+const API_BASE_URL =  import.meta.env.VITE_API_URL;
+console.log('API_BASE_URL:', API_BASE_URL);
 
 // Types
 export interface ApiResponse<T> {
@@ -60,6 +61,7 @@ export interface ContactRequest {
 }
 
 export interface Customer {
+  id?: string;
   _id: string;
   username: string;
   email: string;
@@ -85,6 +87,7 @@ export interface Customer {
 }
 
 export interface Transaction {
+  id?: string;
   _id: string;
   transactionId: string;
   customer: string;
@@ -108,6 +111,7 @@ export interface Transaction {
 }
 
 export interface Product {
+  id?: string;
   _id: string;
   name: string;
   description: string;
@@ -123,6 +127,7 @@ export interface Product {
 }
 
 export interface Banner {
+  id?: string;
   _id: string;
   badge?: string;
   title: string;
@@ -138,6 +143,7 @@ export interface Banner {
 }
 
 export interface WhatsNewItem {
+  id?: string;
   _id: string;
   title?: string;
   description: string;
@@ -149,6 +155,7 @@ export interface WhatsNewItem {
 }
 
 export interface RecentCompany {
+  id?: string;
   _id: string;
   companyName: string;
   companyLogo?: string;
@@ -157,6 +164,7 @@ export interface RecentCompany {
 }
 
 export interface Brand {
+  id?: string;
   _id: string;
   companyName: string;
   email: string;

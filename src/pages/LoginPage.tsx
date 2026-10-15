@@ -68,22 +68,22 @@ export function LoginPage() {
       const response = await customerApi.login({
         email: email.trim(),
         password: password.trim(),
-        deviceToken: 'c-5cML0cRXKBjabcZYr5J_:APA91bGgoE0gOUo2z7UB2p93SxfjkvKq5XZmLlRV4ILTFZfIsSUlAgsa2PDWlB3xZ87OLiIdWojaDFPLJx9Uj3y-JhaKLXK46nJ12acg_Q0SNwuBIVsK8p8'
+        deviceToken: ''
       });
-
+       console.log('Login response:', response.success);
       if (response.success && response.token && response.user) {
         try {
           const profileResponse = await customerApi.getProfile();
           if (profileResponse.success && profileResponse.data) {
             const userData = profileResponse.data;
             const authUserData = {
-              id: userData._id,
+              id: userData.id,
               email: userData.email,
               fullName: userData.username,
               phoneNumber: userData.phone || '',
               points: userData.totalPoints || 0,
               linkedBrands: userData.linkedCompanies?.map((lc: any) =>
-                typeof lc.company === 'string' ? lc.company : lc.company._id
+                typeof lc.company === 'object' ? lc.company.id : lc.company
               ) || [],
               createdAt: userData.createdAt,
             };

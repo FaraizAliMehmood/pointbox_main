@@ -68,8 +68,9 @@ export function CustomerProfilePage() {
         const linkedCompanies = (profileResponse.data as any)?.linkedCompanies;
         if (profileResponse.success && Array.isArray(linkedCompanies)) {
           const mappedBrands: Brand[] = linkedCompanies.map((link: any) => {
-            const company = typeof link.company === 'object' ? link.company : null;
-            const companyId = company?._id?.toString() || (typeof link.company === 'string' ? link.company : '');
+            // Backend returns `company` as a flat id and the rest of the
+            // company fields (companyName, companyLogo, ...) directly on `link`.
+            const companyId = link.company != null ? String(link.company) : '';
 
             // Tier data returned by the API for this linked company
             const tier = link.tier && typeof link.tier === 'object'
@@ -83,11 +84,11 @@ export function CustomerProfilePage() {
 
             return {
               id: companyId,
-              name: company?.companyName || 'Unknown Brand',
-              description: company?.address || company?.country || 'Partner brand',
-              logo: company?.logo || company?.companyLogo || '',
-              companyLogo: company?.companyLogo || company?.logo || '',
-              category: company?.country || 'General',
+              name: link.companyName || 'Unknown Brand',
+              description: link.companyAddress || link.companyCountry || 'Partner brand',
+              logo: link.companyLogo || '',
+              companyLogo: link.companyLogo || '',
+              category: link.companyCountry || 'General',
               linked: true,
               redeemPoints: link.redeem_points || link.points || 0,
               tierPoints: link.tier_points || 0,

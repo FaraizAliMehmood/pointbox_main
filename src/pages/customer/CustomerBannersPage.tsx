@@ -53,7 +53,7 @@ export function CustomerBannersPage() {
             const endDate = parseDate(apiBanner.endDate, new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString());
 
             return {
-              id: apiBanner._id,
+              id: apiBanner.id || apiBanner._id,
               title: apiBanner.title,
               description: apiBanner.description || '',
               image: apiBanner.imageUrl || apiBanner.image,

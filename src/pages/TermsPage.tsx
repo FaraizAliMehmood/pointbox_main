@@ -15,6 +15,7 @@ const getIconForSection = (section: string) => {
 };
 
 interface TermsSection {
+  id?: string;
   _id: string;
   title: string;
   content: string;
@@ -107,7 +108,7 @@ export function TermsPage() {
               const Icon = getIconForSection(section.section);
               return (
                 <motion.div
-                  key={section._id}
+                  key={section.id || section._id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}

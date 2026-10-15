@@ -75,13 +75,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (profileResponse.success && profileResponse.data) {
           const userData = profileResponse.data;
           const authUserData: User = {
-            id: userData._id,
+            id: userData.id,
             email: userData.email,
             fullName: userData.username,
             phoneNumber: userData.phone || '',
             points: userData.totalPoints || 0,
-            linkedBrands: userData.linkedCompanies?.map((lc: { company: string | { _id: string } }) =>
-              typeof lc.company === 'string' ? lc.company : lc.company._id
+            linkedBrands: userData.linkedCompanies?.map((lc: { company: string | { id: string } }) =>
+              typeof lc.company === 'object' ? lc.company.id : lc.company
             ) || [],
             createdAt: userData.createdAt,
           };
@@ -121,13 +121,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           if (profileResponse.success && profileResponse.data) {
             const userData = profileResponse.data;
             const authUserData: User = {
-              id: userData._id,
+              id: userData.id,
               email: userData.email,
               fullName: userData.username,
               phoneNumber: userData.phone || '',
               points: userData.totalPoints || 0,
-              linkedBrands: userData.linkedCompanies?.map((lc: { company: string | { _id: string } }) =>
-                typeof lc.company === 'string' ? lc.company : lc.company._id
+              linkedBrands: userData.linkedCompanies?.map((lc: { company: string | { id: string } }) =>
+                typeof lc.company === 'object' ? lc.company.id : lc.company
               ) || [],
               createdAt: userData.createdAt,
             };
@@ -140,7 +140,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
 
         const authUserData: User = {
-          id: response.user.id || response.user._id,
+          id: response.user.id,
           email: response.user.email,
           fullName: response.user.username || response.user.fullName || '',
           phoneNumber: response.user.phone || '',

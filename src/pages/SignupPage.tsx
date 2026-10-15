@@ -346,7 +346,7 @@ export function SignupPage() {
                   <div className="space-y-6">
                     {termsSections.map((section) => (
                       <div
-                        key={section._id}
+                        key={section.id || section._id}
                         className="bg-gray-50 rounded-lg p-6 border border-gray-200"
                       >
                         <h3 className="text-xl font-semibold text-gray-900 mb-3">

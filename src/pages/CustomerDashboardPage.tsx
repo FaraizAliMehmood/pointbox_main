@@ -180,7 +180,7 @@ export function CustomerDashboardPage() {
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
             {recentCompanies.map((company) => (
-              <NewBrandCard key={company._id} company={company} />
+              <NewBrandCard key={company.id || company._id} company={company} />
             ))}
           </div>
         </div>
@@ -201,7 +201,7 @@ export function CustomerDashboardPage() {
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
             {topOffers.map((banner) => (
-              <TopOfferCard key={banner._id} banner={banner} />
+              <TopOfferCard key={banner.id || banner._id} banner={banner} />
             ))}
           </div>
         </div>

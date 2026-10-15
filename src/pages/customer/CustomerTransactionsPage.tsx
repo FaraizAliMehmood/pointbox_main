@@ -47,7 +47,7 @@ export function CustomerTransactionsPage() {
         if (response.success && response.data) {
           // Map API transactions to component's Transaction format
           const mappedTransactions: Transaction[] = response.data.map((apiTxn: ApiTransaction) => ({
-            id: apiTxn.transactionId || apiTxn._id,
+            id: apiTxn.transactionId || apiTxn.id || apiTxn._id,
             userId: typeof apiTxn.customer === 'string' ? apiTxn.customer : undefined,
             type: apiTxn.type,
             points: apiTxn.points,
