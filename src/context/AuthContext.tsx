@@ -75,14 +75,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (profileResponse.success && profileResponse.data) {
           const userData = profileResponse.data;
           const authUserData: User = {
-            id: userData.id,
+            id: userData.id || userData._id,
             email: userData.email,
             fullName: userData.username,
             phoneNumber: userData.phone || '',
             points: userData.totalPoints || 0,
-            linkedBrands: userData.linkedCompanies?.map((lc: { company: string | { id: string } }) =>
-              typeof lc.company === 'object' ? lc.company.id : lc.company
-            ) || [],
+            linkedBrands: userData.linkedCompanies?.map((lc) => String(lc.company)) || [],
             createdAt: userData.createdAt,
           };
           localStorage.setItem('customer_user', JSON.stringify(authUserData));
@@ -121,14 +119,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           if (profileResponse.success && profileResponse.data) {
             const userData = profileResponse.data;
             const authUserData: User = {
-              id: userData.id,
+              id: userData.id || userData._id,
               email: userData.email,
               fullName: userData.username,
               phoneNumber: userData.phone || '',
               points: userData.totalPoints || 0,
-              linkedBrands: userData.linkedCompanies?.map((lc: { company: string | { id: string } }) =>
-                typeof lc.company === 'object' ? lc.company.id : lc.company
-              ) || [],
+              linkedBrands: userData.linkedCompanies?.map((lc) => String(lc.company)) || [],
               createdAt: userData.createdAt,
             };
             localStorage.setItem('customer_user', JSON.stringify(authUserData));

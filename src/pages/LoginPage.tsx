@@ -82,9 +82,7 @@ export function LoginPage() {
               fullName: userData.username,
               phoneNumber: userData.phone || '',
               points: userData.totalPoints || 0,
-              linkedBrands: userData.linkedCompanies?.map((lc: any) =>
-                typeof lc.company === 'object' ? lc.company.id : lc.company
-              ) || [],
+              linkedBrands: userData.linkedCompanies?.map((lc: any) => String(lc.company)) || [],
               createdAt: userData.createdAt,
             };
             localStorage.setItem('customer_user', JSON.stringify(authUserData));

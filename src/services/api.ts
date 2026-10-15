@@ -4,7 +4,7 @@
  */
 
 // API Configuration - Vite uses import.meta.env
-const API_BASE_URL =  import.meta.env.VITE_API_URL;
+const API_BASE_URL: string = import.meta.env.VITE_API_URL ?? '';
 console.log('API_BASE_URL:', API_BASE_URL);
 
 // Types
@@ -71,15 +71,15 @@ export interface Customer {
   totalPoints: number;
   redeemedPoints: number;
   linkedCompanies: Array<{
-    company: string | {
-      _id: string;
-      companyName: string;
-      email: string;
-      address?: string;
-      country?: string;
-    };
-    points: number;
-    tier?: string;
+    company: string | number;
+    companyName?: string;
+    companyAddress?: string;
+    companyCountry?: string;
+    companyLogo?: string;
+    redeem_points?: number;
+    tier_points?: number;
+    points?: number;
+    tier?: { name: string; minPoints: number; maxPoints: number | null; expiryDate: string | null } | null;
   }>;
   isActive: boolean;
   createdAt: string;
