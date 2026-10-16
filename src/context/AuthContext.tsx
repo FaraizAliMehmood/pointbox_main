@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { customerApi } from '@/services/api';
+import { listenForForegroundMessages, getFcmDeviceToken } from '@/lib/firebase';
 
 export interface User {
   id: string;
@@ -103,14 +104,37 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     verifyAndRestoreAuth();
   }, []);
 
+  useEffect(() => {
+    let unsubscribe: (() => void) | undefined;
+
+    listenForForegroundMessages((payload) => {
+      console.log('[FCM] Foreground message received:', payload);
+      const { title, body, icon } = payload.notification || {};
+      if (Notification.permission === 'granted') {
+        try {
+          new Notification(title || 'PointBox', { body, icon: icon || '/vite.svg' });
+        } catch (error) {
+          console.error('[FCM] Failed to display notification:', error);
+        }
+      } else {
+        console.warn('[FCM] Message received but permission is not granted:', Notification.permission);
+      }
+    }).then((unsub) => {
+      unsubscribe = unsub;
+    });
+
+    return () => unsubscribe?.();
+  }, []);
+
   const login = async (email: string, password: string): Promise<boolean> => {
     if (typeof window === 'undefined') return false;
 
     try {
+      const deviceToken = await getFcmDeviceToken();
       const response = await customerApi.login({
         email: email.trim(),
         password: password.trim(),
-        deviceToken: "c-5cML0cRXKBjabcZYr5J_:APA91bGgoE0gOUo2z7UB2p93SxfjkvKq5XZmLlRV4ILTFZfIsSUlAgsa2PDWlB3xZ87OLiIdWojaDFPLJx9Uj3y-JhaKLXK46nJ12acg_Q0SNwuBIVsK8p8"
+        deviceToken: deviceToken || ''
       });
 
       if (response.success && response.token && response.user) {

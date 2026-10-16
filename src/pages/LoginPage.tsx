@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Gift, Mail, Lock, Eye, EyeOff, KeyRound, CheckCircle } from 'lucide-react';
 import { LanguageSelector } from '@/components/common/LanguageSelector';
 import { customerApi } from '@/services/api';
+import { getFcmDeviceToken } from '@/lib/firebase';
 type Mode = 'login' | 'checkEmail' | 'verifyOTP' | 'changePassword';
 
 export function LoginPage() {
@@ -65,10 +66,11 @@ export function LoginPage() {
     }
 
     try {
+      const deviceToken = await getFcmDeviceToken();
       const response = await customerApi.login({
         email: email.trim(),
         password: password.trim(),
-        deviceToken: ''
+        deviceToken: deviceToken || ''
       });
        console.log('Login response:', response.success);
       if (response.success && response.token && response.user) {
