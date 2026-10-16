@@ -12,6 +12,15 @@ dist
 dist-ssr
 *.local
 
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Auto-generated from .env by vite.config.ts (contains Firebase config)
+public/firebase-messaging-sw.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
