@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { Gift, Mail, Lock, User, Phone, Eye, EyeOff, MapPin, Globe, ChevronDown, FileText, Loader2, AlertTriangle } from 'lucide-react';
+import { Gift, Mail, Lock, User, Phone, Eye, EyeOff, MapPin, Globe, ChevronDown, FileText, Loader2, AlertTriangle, Calendar } from 'lucide-react';
 import { LanguageSelector } from '@/components/common/LanguageSelector';
 import { customerApi } from '@/services/api';
 import {
@@ -16,6 +16,25 @@ import {
   DialogBody,
 } from '@/components/ui/dialog';
 
+const MIN_SIGNUP_AGE = 13;
+
+function calculateAge(dateOfBirth: string): number {
+  const dob = new Date(dateOfBirth);
+  const today = new Date();
+  let age = today.getFullYear() - dob.getFullYear();
+  const monthDiff = today.getMonth() - dob.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+  return age;
+}
+
+function getMaxDateOfBirth(): string {
+  const date = new Date();
+  date.setFullYear(date.getFullYear() - MIN_SIGNUP_AGE);
+  return date.toISOString().split('T')[0];
+}
+
 export function SignupPage() {
   const navigate = useNavigate();
   useAuth(); // Ensure we're within AuthProvider
@@ -24,6 +43,7 @@ export function SignupPage() {
     fullName: '',
     email: '',
     phoneNumber: '',
+    dateOfBirth: '',
     address: '',
     country: '',
     password: '',
@@ -80,6 +100,11 @@ export function SignupPage() {
       return;
     }
 
+    if (calculateAge(formData.dateOfBirth) < MIN_SIGNUP_AGE) {
+      setError(t('auth.ageTooYoung'));
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       setError(t('auth.passwordsDoNotMatch'));
       return;
@@ -98,6 +123,7 @@ export function SignupPage() {
         email: formData.email,
         password: formData.password,
         phone: formData.phoneNumber,
+        dateOfBirth: formData.dateOfBirth,
         address: formData.address,
         country: formData.country,
       });
@@ -190,6 +216,25 @@ export function SignupPage() {
                   required
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
                   placeholder={t('auth.phoneNumber')}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700">
+                {t('auth.dateOfBirth')}
+              </label>
+              <div className="relative">
+                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  id="dateOfBirth"
+                  name="dateOfBirth"
+                  type="date"
+                  value={formData.dateOfBirth}
+                  onChange={handleChange}
+                  max={getMaxDateOfBirth()}
+                  required
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
                 />
               </div>
             </div>

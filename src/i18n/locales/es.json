@@ -7,6 +7,7 @@
     "confirmPassword": "Confirmar contraseña",
     "fullName": "Nombre completo",
     "phoneNumber": "Número de teléfono",
+    "dateOfBirth": "Fecha de nacimiento",
     "forgotPassword": "¿Olvidaste tu contraseña?",
     "alreadyHaveAccount": "¿Ya tienes una cuenta?",
     "dontHaveAccount": "¿No tienes una cuenta?",
@@ -19,6 +20,7 @@
     "selectCountry": "Seleccionar país",
     "passwordsDoNotMatch": "Las contraseñas no coinciden",
     "passwordTooShort": "La contraseña debe tener al menos 6 caracteres",
+    "ageTooYoung": "Debes tener al menos 13 años para registrarte",
     "signupFailed": "Error al registrarse. Por favor, inténtalo de nuevo.",
     "errorOccurred": "Ocurrió un error. Por favor, inténtalo de nuevo.",
     "invalidEmailOrPassword": "Correo electrónico o contraseña inválidos"

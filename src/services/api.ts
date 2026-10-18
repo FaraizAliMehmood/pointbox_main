@@ -27,6 +27,7 @@ export interface SignupRequest {
   email: string;
   password: string;
   phone?: string;
+  dateOfBirth?: string;
   address?: string;
   country?: string;
   googleId?: string;

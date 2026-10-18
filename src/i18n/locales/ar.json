@@ -7,6 +7,7 @@
     "confirmPassword": "تأكيد كلمة المرور",
     "fullName": "الاسم الكامل",
     "phoneNumber": "رقم الهاتف",
+    "dateOfBirth": "تاريخ الميلاد",
     "forgotPassword": "نسيت كلمة المرور؟",
     "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
     "dontHaveAccount": "ليس لديك حساب؟",
@@ -19,6 +20,7 @@
     "selectCountry": "اختر البلد",
     "passwordsDoNotMatch": "كلمات المرور غير متطابقة",
     "passwordTooShort": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "ageTooYoung": "يجب أن يكون عمرك 13 عامًا على الأقل للتسجيل",
     "signupFailed": "فشل التسجيل. يرجى المحاولة مرة أخرى.",
     "errorOccurred": "حدث خطأ. يرجى المحاولة مرة أخرى.",
     "invalidEmailOrPassword": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
